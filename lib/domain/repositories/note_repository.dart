@@ -4,6 +4,6 @@ import '../entities/note.dart';
 abstract class NoteRepository {
   Future<List<Note>> getAllNotes();
   Future<void> addNote(String title, String text);
-  Future<void> deleteNote(int id);
+  Future<void> deleteNote(String id);
 } 
 

@@ -10,8 +10,11 @@ class IsarNoteRepositoryImpl implements NoteRepository {
   @override
   Future<List<Note>> getAllNotes() async {
     final models = await isar.noteModels.where().findAll();
-    // Превращаем модели базы данных в чистые сущности Domain
-    return models.map((m) => Note(id: m.id, text: m.text, title: m.text)).toList();
+    return models.map((m) => Note(
+      id: m.id.toString(), // ПРЕВРАЩАЕМ int В String
+      text: m.text, 
+      title: m.title, // Добавил заголовок
+    )).toList();
   }
 
   @override
@@ -21,8 +24,12 @@ class IsarNoteRepositoryImpl implements NoteRepository {
   }
 
   @override
-  Future<void> deleteNote(int id) async {
-    await isar.writeTxn(() => isar.noteModels.delete(id));
+  Future<void> deleteNote(String id) async {
+    // ПРЕВРАЩАЕМ String ОБРАТНО В int ДЛЯ ISAR
+    final intId = int.tryParse(id); 
+    if (intId != null) {
+      await isar.writeTxn(() => isar.noteModels.delete(intId));
+    }
   }
 }
 

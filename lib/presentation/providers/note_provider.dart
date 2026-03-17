@@ -20,7 +20,7 @@ class NoteNotifier extends AsyncNotifier<List<Note>> {
     state = AsyncData(await ref.read(noteRepositoryProvider).getAllNotes());
   }
 
-  Future<void> deleteNote(int id) async {
+  Future<void> deleteNote(String id) async {
     await ref.read(noteRepositoryProvider).deleteNote(id);
     state = AsyncData(await ref.read(noteRepositoryProvider).getAllNotes());
   }
