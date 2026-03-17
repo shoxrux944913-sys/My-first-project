@@ -11,7 +11,7 @@ class IsarNoteRepositoryImpl implements NoteRepository {
   Future<List<Note>> getAllNotes() async {
     final models = await isar.noteModels.where().findAll();
     // Превращаем модели базы данных в чистые сущности Domain
-    return models.map((m) => Note(id: m.id, text: m.text)).toList();
+    return models.map((m) => Note(id: m.id, text: m.text, title: m.text)).toList();
   }
 
   @override

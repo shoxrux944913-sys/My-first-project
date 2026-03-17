@@ -6,6 +6,7 @@ import 'data/models/note_model.dart';
 import 'data/repositories/isar_note_repository_impl.dart';
 import 'presentation/pages/home_page.dart';
 import 'presentation/providers/note_provider.dart';
+//import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
