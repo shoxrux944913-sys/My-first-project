@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../providers/note_provider.dart';
@@ -9,8 +10,21 @@ class HomePage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final notesAsync = ref.watch(notesProvider);
 
+   // AppBar(title: const Text('Clean Notes')),
     return Scaffold(
-      appBar: AppBar(title: const Text('Clean Notes')),
+      appBar: AppBar(
+  title: const Text('Мои заметки'),
+  actions: [
+    IconButton(
+      icon: const Icon(Icons.logout),
+      onPressed: () async {
+        // Выходим из системы
+        await FirebaseAuth.instance.signOut();
+        // AuthGate сам увидит, что юзер вышел, и перекинет на регистрацию!
+      },
+    ),
+  ],
+),
       body: notesAsync.when(
         data: (notes) => ListView.builder(
           itemCount: notes.length,
